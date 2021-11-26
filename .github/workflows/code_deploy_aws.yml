@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Deploy Contacts App to AWS
 
 # Controls when the workflow will run
 on:
@@ -36,7 +36,7 @@ jobs:
         id: deploy
         run: |
           aws deploy create-deployment \
-            --application-name pulumi-blog-codedeploy-app \
+            --application-name pulumi-blog-codedeploy-app-a2636bd \
             --deployment-group-name pulumi-blog-codedeploy-deploymentgroup \
             --deployment-config-name CodeDeployDefault.OneAtATime \
             --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
