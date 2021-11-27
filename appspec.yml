@@ -4,15 +4,15 @@ files:
   - source: /
     destination: /home/ec2-user/contacts-app
 hooks:
-  ApplicationStop:
-    - location: cd-scripts/appStop.sh
-      timeout: 300
-      runas: ec2-user
   BeforeInstall:
     - location: cd-scripts/setup.sh
       timeout: 300
       runas: ec2-user
   ApplicationStart:
     - location: cd-scripts/appStart.sh
+      timeout: 300
+      runas: ec2-user  
+  ApplicationStop:
+    - location: cd-scripts/appStop.sh
       timeout: 300
       runas: ec2-user
