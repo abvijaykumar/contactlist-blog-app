@@ -1,14 +1,31 @@
 var express = require('express');
+
+
+
 var path = require('path');
 const fs = require('fs');
-const AWS = require('aws-sdk');
-
-
 var app = express();
-var docClient = new AWS.DynamoDB.DocumentClient();
+
+const AWS = require('aws-sdk');
+AWS.config.update({region: "us-east-1"});
+const docClient = new AWS.DynamoDB.DocumentClient();
 
 app.get('/', function (req, res) {
-   res.send('Hello World');
+
+   res.send("COntact List application");
+})
+
+app.get('/fetchAllContacts', function (req, res) {
+    var params = {
+        TableName:"contacts-table-cd32c30",
+    }
+    docClient.scan(params,(err, data) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(data);
+        }
+    });
 })
 
 app.get('/addContact', function (req, res) {
@@ -16,7 +33,7 @@ app.get('/addContact', function (req, res) {
     var contactName = req.query.contactName;
     var contactNumber = req.query.contactNumber;
     var params = {
-        TableName:"contacts-table",
+        TableName:"contacts-table-cd32c30",
         Item:{
             "ContactName": contactName,
             "ContactNumber": contactNumber,
