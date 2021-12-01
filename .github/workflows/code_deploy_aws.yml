@@ -36,7 +36,7 @@ jobs:
         id: deploy
         run: |
           aws deploy create-deployment \
-            --application-name pulumi-blog-codedeploy-app-bcbca83 \
+            --application-name pulumi-blog-codedeploy-app-a481a7c \
             --deployment-group-name pulumi-blog-codedeploy-deploymentgroup \
             --deployment-config-name CodeDeployDefault.OneAtATime \
             --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
