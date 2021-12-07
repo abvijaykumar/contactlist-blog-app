@@ -5,6 +5,7 @@ var express = require('express');
 var path = require('path');
 const fs = require('fs');
 var app = express();
+var table_name = "contacts-table-b8e77d6"
 
 const AWS = require('aws-sdk');
 AWS.config.update({region: "us-east-1"});
@@ -17,7 +18,7 @@ app.get('/', function (req, res) {
 
 app.get('/fetchAllContacts', function (req, res) {
     var params = {
-        TableName:"contacts-table-cd32c30",
+        TableName:table_name,
     }
     docClient.scan(params,(err, data) => {
         if (err) {
@@ -33,7 +34,7 @@ app.get('/addContact', function (req, res) {
     var contactName = req.query.contactName;
     var contactNumber = req.query.contactNumber;
     var params = {
-        TableName:"contacts-table-cd32c30",
+        TableName:table_name,
         Item:{
             "ContactName": contactName,
             "ContactNumber": contactNumber,
@@ -56,7 +57,7 @@ app.get('/addContact', function (req, res) {
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-var server = app.listen(8081, function () {
+var server = app.listen(80, function () {
    var host = server.address().address;
    var port = server.address().port;
    
