@@ -13,6 +13,7 @@ export NVM_DIR="$HOME/.nvm"
 
 #install node modules
 npm install
+export PORT=8081
 
 #start our node app in the background
 node index.js > app.out.log 2> app.err.log < /dev/null & 
