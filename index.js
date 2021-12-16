@@ -1,24 +1,24 @@
 var express = require('express');
-
-
-
 var path = require('path');
 const fs = require('fs');
+const cors = require('cors');
+
 var app = express();
-var table_name = "contacts-table-b8e77d6"
+app.use(cors())
+
+var table_name = "contacts-table"
 
 const AWS = require('aws-sdk');
 AWS.config.update({region: "us-east-1"});
 const docClient = new AWS.DynamoDB.DocumentClient();
 
 app.get('/', function (req, res) {
-
-   res.send("COntact List application");
+   res.send("Contact List API");
 })
 
 app.get('/fetchAllContacts', function (req, res) {
     var params = {
-        TableName:table_name,
+        TableName:table_name
     }
     docClient.scan(params,(err, data) => {
         if (err) {
@@ -33,6 +33,8 @@ app.get('/addContact', function (req, res) {
 
     var contactName = req.query.contactName;
     var contactNumber = req.query.contactNumber;
+    console.log(contactName);
+    console.log(contactNumber);
     var params = {
         TableName:table_name,
         Item:{
@@ -53,11 +55,8 @@ app.get('/addContact', function (req, res) {
     console.log(req.query.contactName);
        
 })
- 
-app.use(express.static(path.join(__dirname, 'public')));
 
-
-var server = app.listen(80, function () {
+var server = app.listen(8081, function () {
    var host = server.address().address;
    var port = server.address().port;
    
