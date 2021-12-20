@@ -1,6 +1,4 @@
 var express = require('express');
-var path = require('path');
-const fs = require('fs');
 const cors = require('cors');
 
 var app = express();
@@ -42,7 +40,6 @@ app.get('/addContact', function (req, res) {
             "ContactNumber": contactNumber,
         }
     };
-    
     docClient.put(params, function(err, data) {
         if (err) {
             console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
@@ -60,5 +57,5 @@ var server = app.listen(8081, function () {
    var host = server.address().address;
    var port = server.address().port;
    
-   console.log("Example app listening at http://%s:%s", host, port);
+   console.log("Contact apis listening at http://%s:%s", host, port);
 })

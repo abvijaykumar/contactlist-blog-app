@@ -7,7 +7,7 @@ nvm install node
 sudo chmod +x ./appStop.sh
 
 #create our working directory if it doesnt exist
-DIR="/home/ec2-user/contacts-app"
+DIR="/home/ec2-user/contacts-api"
 if [ -d "$DIR" ]; then
   echo "${DIR} exists"
 else
